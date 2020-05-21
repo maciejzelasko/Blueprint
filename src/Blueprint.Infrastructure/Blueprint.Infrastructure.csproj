@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Blueprint.Domain\Blueprint.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DI\" />
+  </ItemGroup>
+
 </Project>
