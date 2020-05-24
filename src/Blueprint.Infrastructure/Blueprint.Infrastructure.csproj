@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blueprint.Domain\Blueprint.Domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DI\" />
+    <ProjectReference Include="..\Blueprint.Domain\Blueprint.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,5 @@
+using Blueprint.App.DI;
+using Blueprint.Infrastructure.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,8 @@ namespace Blueprint.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddInfrastructure();
+            services.AddBlueprintApp();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
