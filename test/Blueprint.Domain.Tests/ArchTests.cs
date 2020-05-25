@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Blueprint.Domain.Entities;
-using Blueprint.Domain.Repositories;
 using FluentAssertions;
 using NetArchTest.Rules;
 using Xunit;

@@ -2,7 +2,7 @@ using System;
 
 namespace Blueprint.Domain.Entities
 {
-    public class WeatherForecast
+    public class WeatherForecast : Entity
     {
         private WeatherForecast()
         {
