@@ -4,6 +4,10 @@ namespace Blueprint.Domain.Entities
 {
     public class WeatherForecast
     {
+        private WeatherForecast()
+        {
+        }
+
         public WeatherForecast(DateTime date, int temperatureC, string summary)
         {
             Date = date;
