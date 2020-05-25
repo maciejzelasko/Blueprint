@@ -4,6 +4,7 @@ using Blueprint.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo(nameof(Blueprint.Infrastructure) + ".Tests")]
+[assembly: InternalsVisibleTo("Blueprint.Api.Tests")]
 
 namespace Blueprint.Infrastructure.DI
 {

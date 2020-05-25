@@ -14,22 +14,6 @@ namespace Blueprint.Domain.Tests
         private static readonly Assembly DomainAssembly = typeof(Entity).Assembly;
 
         [Fact]
-        public void BlueprintDomain_DoesNotHaveDependency_ToBlueprintInfrastructure()
-        {
-            // Arrange
-            const string infrastructureNamespace = "Blueprint.Infrastructure";
-
-            // Act
-            var result = Types.InAssembly(typeof(IWeatherForecastRepo).Assembly)
-                .Should()
-                .NotHaveDependencyOnAny(infrastructureNamespace)
-                .GetResult();
-
-            // Assert
-            result.FailingTypes.Should().BeNullOrEmpty();
-        }
-
-        [Fact]
         public void Entity_Should_Have_Parameterless_Private_Constructor()
         {
             // Arrange
