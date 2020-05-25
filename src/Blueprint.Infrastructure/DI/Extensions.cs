@@ -1,6 +1,9 @@
-﻿using Blueprint.Domain.Repositories;
+﻿using System.Runtime.CompilerServices;
+using Blueprint.Domain.Repositories;
 using Blueprint.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+
+[assembly: InternalsVisibleTo(nameof(Blueprint.Infrastructure) + ".Tests")]
 
 namespace Blueprint.Infrastructure.DI
 {

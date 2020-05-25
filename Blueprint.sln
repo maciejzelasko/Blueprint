@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blueprint.App", "src\Bluepr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blueprint.Api", "src\Blueprint.Api\Blueprint.Api.csproj", "{A033A7D3-FF60-4659-922D-DEC529E6B5DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blueprint.Api.IntegrationTests", "test\Blueprint.Api.IntegrationTests\Blueprint.Api.IntegrationTests.csproj", "{1F0A3AA8-F0D7-400E-96BC-E6D1759B0897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blueprint.Api.IntegrationTests", "test\Blueprint.Api.IntegrationTests\Blueprint.Api.IntegrationTests.csproj", "{1F0A3AA8-F0D7-400E-96BC-E6D1759B0897}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blueprint.Domain.Tests", "test\Blueprint.Domain.Tests\Blueprint.Domain.Tests.csproj", "{5196D04F-4E79-482E-B8CE-C411CDEA4537}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blueprint.Domain.Tests", "test\Blueprint.Domain.Tests\Blueprint.Domain.Tests.csproj", "{5196D04F-4E79-482E-B8CE-C411CDEA4537}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blueprint.App.Tests", "test\Blueprint.App.Tests\Blueprint.App.Tests.csproj", "{1213C5EE-0A77-467A-A371-9E06626DCFF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blueprint.App.Tests", "test\Blueprint.App.Tests\Blueprint.App.Tests.csproj", "{1213C5EE-0A77-467A-A371-9E06626DCFF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blueprint.Api.Tests", "test\Blueprint.Api.Tests\Blueprint.Api.Tests.csproj", "{BBA58B26-8ADC-4E9A-B958-9D8D65DE0FE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{1213C5EE-0A77-467A-A371-9E06626DCFF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1213C5EE-0A77-467A-A371-9E06626DCFF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1213C5EE-0A77-467A-A371-9E06626DCFF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA58B26-8ADC-4E9A-B958-9D8D65DE0FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA58B26-8ADC-4E9A-B958-9D8D65DE0FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA58B26-8ADC-4E9A-B958-9D8D65DE0FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA58B26-8ADC-4E9A-B958-9D8D65DE0FE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{1F0A3AA8-F0D7-400E-96BC-E6D1759B0897} = {C0ACCC85-077A-4650-B52B-6AD68B8903B8}
 		{5196D04F-4E79-482E-B8CE-C411CDEA4537} = {C0ACCC85-077A-4650-B52B-6AD68B8903B8}
 		{1213C5EE-0A77-467A-A371-9E06626DCFF5} = {C0ACCC85-077A-4650-B52B-6AD68B8903B8}
+		{BBA58B26-8ADC-4E9A-B958-9D8D65DE0FE4} = {C0ACCC85-077A-4650-B52B-6AD68B8903B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73F858ED-251D-4825-8424-0B2F7ADF6823}
