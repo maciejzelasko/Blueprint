@@ -15,13 +15,27 @@ namespace Blueprint.App.Tests
         private static readonly Assembly AppAssembly = typeof(GetWeatherForecastsQuery).Assembly;
 
         [Fact]
-        public void Command_Should_Be_Immutable()
+        public void CommandsAndQueries_ShouldBeImmutable()
         {
+            // Arrange and Act
             var types = Types.InAssembly(AppAssembly)
                 .That().ImplementInterface(typeof(IRequest<>))
                 .GetTypes();
 
+            // Assert
             types.ShouldBeImmutable();
+        }
+
+        [Fact]
+        public void CommandAndQueryHandlers_ShouldNotBePublic()
+        {
+            // Arrange and Act
+            var result = Types.InAssembly(AppAssembly)
+                .That()
+                .ImplementInterface(typeof(IRequestHandler<>))
+                .Should().NotBePublic().GetResult();
+
+            result.IsSuccessful.Should().BeTrue();
         }
     }
 
