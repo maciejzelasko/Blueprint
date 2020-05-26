@@ -18,39 +18,39 @@ namespace Blueprint.Api.Tests
         public void DomainLayer_DoesNotHaveDependency_ToApplicationLayer()
         {
             // Arrange and Act
-            var result = Types.InAssembly(DomainAssembly)
-                .Should()
-                .NotHaveDependencyOn(AppAssembly.GetName().Name)
-                .GetResult();
+            var result = DomainAssembly.CheckIfDependsOn(AppAssembly);
 
             // Assert
-            result.FailingTypes.Should().BeNullOrEmpty();
+            result.IsSuccessful.Should().BeTrue();
         }
 
         [Fact]
         public void DomainLayer_DoesNotHaveDependency_ToInfrastructureLayer()
         {
             // Arrange and Act
-            var result = Types.InAssembly(DomainAssembly)
-                .Should()
-                .NotHaveDependencyOn(InfrastructureAssembly.GetName().Name)
-                .GetResult();
+            var result = DomainAssembly.CheckIfDependsOn(InfrastructureAssembly);
 
             // Assert
-            result.FailingTypes.Should().BeNullOrEmpty();
+            result.IsSuccessful.Should().BeTrue();
         }
 
         [Fact]
         public void InfrastructureLayer_DoesNotHaveDependency_ToApplicationLayer()
         {
             // Arrange and Act
-            var result = Types.InAssembly(InfrastructureAssembly)
-                .Should()
-                .NotHaveDependencyOn(AppAssembly.GetName().Name)
-                .GetResult();
+            var result = InfrastructureAssembly.CheckIfDependsOn(AppAssembly);
 
             // Assert
-            result.FailingTypes.Should().BeNullOrEmpty();
+            result.IsSuccessful.Should().BeTrue();
         }
+    }
+
+    public static class ArchTestsExtensions
+    {
+        public static TestResult CheckIfDependsOn(this Assembly inAssembly, Assembly assemblyToCheck) =>
+            Types.InAssembly(inAssembly)
+                .Should()
+                .NotHaveDependencyOn(assemblyToCheck.GetName().Name)
+                .GetResult();
     }
 }

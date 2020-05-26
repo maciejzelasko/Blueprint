@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Blueprint.Domain.Entities;
 using FluentAssertions;
@@ -13,7 +13,7 @@ namespace Blueprint.Domain.Tests
         private static readonly Assembly DomainAssembly = typeof(Entity).Assembly;
 
         [Fact]
-        public void Entity_Should_Have_Parameterless_Private_Constructor()
+        public void Entity_ShouldHaveParameterlessPrivateConstructor()
         {
             // Arrange
             var entityTypes = Types.InAssembly(DomainAssembly)
@@ -21,27 +21,28 @@ namespace Blueprint.Domain.Tests
                 .Inherit(typeof(Entity)).GetTypes();
 
             // Act
-            var failingTypes = new List<Type>();
-            foreach (var entityType in entityTypes)
-            {
-                var hasPrivateParameterlessConstructor = false;
-                var constructors = entityType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                foreach (var constructorInfo in constructors)
-                {
-                    if (constructorInfo.IsPrivate && constructorInfo.GetParameters().Length == 0)
-                    {
-                        hasPrivateParameterlessConstructor = true;
-                    }
-                }
-
-                if (!hasPrivateParameterlessConstructor)
-                {
-                    failingTypes.Add(entityType);
-                }
-            }
+            var failingTypes =
+                from entityType in entityTypes
+                let hasPrivateParameterlessConstructor = entityType.HasPrivateParameterlessConstructor()
+                where !hasPrivateParameterlessConstructor
+                select entityType;
 
             // Assert
             failingTypes.Should().BeNullOrEmpty();
+        }
+    }
+
+    public static class ArchTestsExtensions
+    {
+        public static bool HasPrivateParameterlessConstructor(this Type type)
+        {
+            var hasPrivateParameterlessConstructor = false;
+            var constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var constructorInfo in constructors)
+                if (constructorInfo.IsPrivate && constructorInfo.GetParameters().Length == 0)
+                    hasPrivateParameterlessConstructor = true;
+
+            return hasPrivateParameterlessConstructor;
         }
     }
 }

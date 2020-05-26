@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
@@ -23,9 +24,8 @@ namespace Blueprint.Api.IntegrationTests
             var response = await client.GetAsync("weatherForecast");
 
             // Assert
-            response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal("application/json; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
+            response.StatusCode.Should().Be(200);
+            response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
         }
     }
 }
