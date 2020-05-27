@@ -2,6 +2,11 @@ using System;
 
 namespace Blueprint.Domain.Entities
 {
+    [StronglyTypedId]
+    public partial struct WeatherForecastId
+    {
+    }
+
     public class WeatherForecast : Entity
     {
         private WeatherForecast()
@@ -10,11 +15,13 @@ namespace Blueprint.Domain.Entities
 
         public WeatherForecast(DateTime date, int temperatureC, string summary)
         {
+            Id = new WeatherForecastId(Guid.NewGuid());
             Date = date;
             TemperatureC = temperatureC;
             Summary = summary;
         }
-        
+
+        public WeatherForecastId Id { get; protected set; }
         public DateTime Date { get; protected set; }
 
         public int TemperatureC { get; protected set; }
