@@ -19,7 +19,7 @@ namespace Blueprint.Api.Controllers
         }
         
         [HttpGet]
-        public async Task<IEnumerable<WeatherForecastDto>> Get() =>
-            await _mediator.Send(new GetWeatherForecastsQuery());
+        public async Task<IEnumerable<WeatherForecastDto>> Get([FromQuery] int noDays) =>
+            await _mediator.Send(new GetWeatherForecastsQuery(noDays));
     }
 }

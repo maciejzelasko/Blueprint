@@ -19,9 +19,10 @@ namespace Blueprint.Api.IntegrationTests
         {
             // Arrange
             var client = _factory.CreateClient();
+            const int noDays = 7;
 
             // Act
-            var response = await client.GetAsync("weatherForecast");
+            var response = await client.GetAsync($"weatherForecast?noDays={noDays}");
 
             // Assert
             response.StatusCode.Should().Be(200);
