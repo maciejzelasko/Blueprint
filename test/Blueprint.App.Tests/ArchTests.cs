@@ -54,9 +54,7 @@ namespace Blueprint.App.Tests
             failingTypes.Should().BeEmpty();
         }
 
-        private static bool IsImmutable(this Type type)
-        {
-            return type.GetFields().All(x => x.IsInitOnly) && type.GetProperties().All(x => x.CanWrite == false);
-        }
+        private static bool IsImmutable(this Type type) =>
+            type.GetFields().All(x => x.IsInitOnly) && type.GetProperties().All(x => x.CanWrite == false);
     }
 }
