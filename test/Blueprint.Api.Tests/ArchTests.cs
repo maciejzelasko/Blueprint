@@ -18,7 +18,7 @@ namespace Blueprint.Api.Tests
         public void DomainLayer_DoesNotHaveDependency_ToApplicationLayer()
         {
             // Arrange and Act
-            var result = DomainAssembly.CheckIfDependsOn(AppAssembly);
+            var result = DomainAssembly.CheckIfNotDependsOn(AppAssembly);
 
             // Assert
             result.IsSuccessful.Should().BeTrue();
@@ -28,7 +28,7 @@ namespace Blueprint.Api.Tests
         public void DomainLayer_DoesNotHaveDependency_ToInfrastructureLayer()
         {
             // Arrange and Act
-            var result = DomainAssembly.CheckIfDependsOn(InfrastructureAssembly);
+            var result = DomainAssembly.CheckIfNotDependsOn(InfrastructureAssembly);
 
             // Assert
             result.IsSuccessful.Should().BeTrue();
@@ -38,7 +38,7 @@ namespace Blueprint.Api.Tests
         public void InfrastructureLayer_DoesNotHaveDependency_ToApplicationLayer()
         {
             // Arrange and Act
-            var result = InfrastructureAssembly.CheckIfDependsOn(AppAssembly);
+            var result = InfrastructureAssembly.CheckIfNotDependsOn(AppAssembly);
 
             // Assert
             result.IsSuccessful.Should().BeTrue();
@@ -47,7 +47,7 @@ namespace Blueprint.Api.Tests
 
     public static class ArchTestsExtensions
     {
-        public static TestResult CheckIfDependsOn(this Assembly inAssembly, Assembly assemblyToCheck) =>
+        public static TestResult CheckIfNotDependsOn(this Assembly inAssembly, Assembly assemblyToCheck) =>
             Types.InAssembly(inAssembly)
                 .Should()
                 .NotHaveDependencyOn(assemblyToCheck.GetName().Name)
