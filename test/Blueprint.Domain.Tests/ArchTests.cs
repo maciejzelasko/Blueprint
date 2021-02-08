@@ -18,7 +18,10 @@ namespace Blueprint.Domain.Tests
             // Arrange
             var entityTypes = Types.InAssembly(DomainAssembly)
                 .That()
-                .Inherit(typeof(Entity)).GetTypes();
+                .Inherit(typeof(Entity))
+                .And()
+                .AreNotAbstract()
+                .GetTypes();
 
             // Act
             var failingTypes =
