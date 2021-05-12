@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/maciejzelasko/Blueprint.svg?branch=develop)](https://travis-ci.org/maciejzelasko/Blueprint)
+[![Build Status](https://travis-ci.com/maciejzelasko/Blueprint.svg?branch=develop)](https://travis-ci.com/maciejzelasko/Blueprint)
 
 # Blueprint (Under development)
 
