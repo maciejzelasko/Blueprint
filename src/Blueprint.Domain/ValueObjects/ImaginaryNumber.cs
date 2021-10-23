@@ -15,15 +15,15 @@ namespace Blueprint.Domain.ValueObjects
 
         public double ImaginaryUnit { get; }
 
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(RealNumber, ImaginaryUnit);
+        }
+
         protected override IEnumerable<string> GetEqualityProperties()
         {
             yield return nameof(RealNumber);
             yield return nameof(ImaginaryUnit);
-        }
-
-        protected override int GetHashCodeValue()
-        {
-            return HashCode.Combine(RealNumber, ImaginaryUnit);
         }
     }
 }

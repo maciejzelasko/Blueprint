@@ -11,11 +11,8 @@ namespace Blueprint.Domain.ValueObjects
         {
             return Equals(other as object);
         }
-        
-        public override int GetHashCode()
-        {
-            return GetHashCodeValue();
-        }
+
+        public abstract override int GetHashCode();
 
         public static bool operator ==(ValueObject obj1, ValueObject obj2)
         {
@@ -36,9 +33,7 @@ namespace Blueprint.Domain.ValueObjects
         }
 
         protected abstract IEnumerable<string> GetEqualityProperties();
-
-        protected abstract int GetHashCodeValue();
-
+        
         private bool PropertiesAreEqual(object obj, PropertyInfo p)
         {
             return Equals(p.GetValue(this, null), p.GetValue(obj, null));
