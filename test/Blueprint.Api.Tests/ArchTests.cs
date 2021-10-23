@@ -1,5 +1,5 @@
 using System.Reflection;
-using Blueprint.App.Queries.GetWeatherForecasts;
+using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 using Blueprint.Domain.Entities;
 using Blueprint.Infrastructure.Repositories;
 using FluentAssertions;

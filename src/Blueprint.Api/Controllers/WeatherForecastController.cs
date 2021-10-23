@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 using Blueprint.App.Models;
-using Blueprint.App.Queries.GetWeatherForecasts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

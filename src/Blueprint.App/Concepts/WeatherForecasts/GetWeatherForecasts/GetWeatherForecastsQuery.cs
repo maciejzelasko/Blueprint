@@ -2,7 +2,7 @@
 using Blueprint.App.Models;
 using MediatR;
 
-namespace Blueprint.App.Queries.GetWeatherForecasts
+namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts
 {
     public class GetWeatherForecastsQuery : IRequest<IEnumerable<WeatherForecastDto>>
     {

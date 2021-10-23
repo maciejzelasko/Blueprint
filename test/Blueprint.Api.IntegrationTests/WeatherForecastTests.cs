@@ -1,3 +1,4 @@
+using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -25,7 +26,7 @@ namespace Blueprint.Api.IntegrationTests
             var response = await client.GetAsync($"weatherForecast?noDays={noDays}");
 
             // Assert
-            response.StatusCode.Should().Be(200);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
         }
     }

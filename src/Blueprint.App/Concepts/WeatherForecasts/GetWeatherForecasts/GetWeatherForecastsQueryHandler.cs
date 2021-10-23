@@ -7,7 +7,7 @@ using Blueprint.App.Models;
 using Blueprint.Domain.Repositories;
 using MediatR;
 
-namespace Blueprint.App.Queries.GetWeatherForecasts
+namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts
 {
     internal sealed class
         GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecastDto>>

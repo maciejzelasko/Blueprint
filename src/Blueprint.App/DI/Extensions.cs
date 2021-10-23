@@ -16,8 +16,7 @@ namespace Blueprint.App.DI
                 .AddValidatorsFromAssemblies(new[] {assembly})
                 .AddMappers();
         }
-
-
+        
         private static IServiceCollection AddMappers(this IServiceCollection services) =>
             services.AddScoped<IWeatherForecastMapper, WeatherForecastMapper>();
 

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Blueprint.App.Queries.GetWeatherForecasts
+namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts
 {
     public class GetWeatherForecastsQueryValidator : AbstractValidator<GetWeatherForecastsQuery>
     {

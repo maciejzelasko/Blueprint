@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Blueprint.App.Queries.GetWeatherForecasts;
+using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 using FluentAssertions;
 using MediatR;
 using NetArchTest.Rules;
