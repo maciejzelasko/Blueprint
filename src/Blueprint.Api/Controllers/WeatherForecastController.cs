@@ -10,7 +10,7 @@ namespace Blueprint.Api.Controllers
 {
     [Produces("application/json")]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private readonly IMediator _mediator;

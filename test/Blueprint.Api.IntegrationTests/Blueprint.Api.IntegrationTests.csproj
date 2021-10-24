@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Blueprint.Api.Client\Blueprint.Api.Client.csproj" />
     <ProjectReference Include="..\..\src\Blueprint.Api\Blueprint.Api.csproj" />
   </ItemGroup>
 

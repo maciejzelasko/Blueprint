@@ -1,33 +1,26 @@
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
+using Blueprint.Api.Client;
+using Blueprint.Api.IntegrationTests.Infrastructure;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace Blueprint.Api.IntegrationTests
 {
-    public class WeatherForecastTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class WeatherForecastTests : BaseIntegrationTests<IWeatherForecastApi>
     {
-        public WeatherForecastTests(WebApplicationFactory<Startup> factory)
-        {
-            _factory = factory;
-        }
-
-        private readonly WebApplicationFactory<Startup> _factory;
-
         [Fact]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
         {
             // Arrange
-            var client = _factory.CreateClient();
             const int noDays = 7;
 
             // Act
-            var response = await client.GetAsync($"weatherForecast?noDays={noDays}");
+            var response = await Api.GetAsync(noDays, CancellationToken.None);
 
             // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
+            response.ResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
         }
     }
 }

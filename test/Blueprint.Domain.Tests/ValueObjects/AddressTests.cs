@@ -12,6 +12,7 @@ namespace Blueprint.Domain.Tests.ValueObjects
             // Arrange
             var address1 = Address.Create("Krakowska", "38-100");
             var address2 = Address.Create("Krakowska", "38-100");
+            var address3 = Address.Create("Rzeszowska", "38-100");
 
             // Act
             var address1String = address1.ToString();
@@ -19,6 +20,9 @@ namespace Blueprint.Domain.Tests.ValueObjects
 
             // Act & Assert
             address1.Should().Be(address2);
+            (address1 == address2).Should().Be(true);
+            (address1 == address3).Should().Be(false);
+            (address1 != address3).Should().Be(true);
             address1String.Should().Be(address2String);
         }
     }
