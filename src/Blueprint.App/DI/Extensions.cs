@@ -1,5 +1,5 @@
-﻿using Blueprint.App.Mappers;
-using Blueprint.App.Validators;
+﻿using Blueprint.App.Validators;
+using Blueprint.Domain.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,16 +11,17 @@ namespace Blueprint.App.DI
         public static IServiceCollection AddBlueprintApp(this IServiceCollection services)
         {
             var assembly = typeof(Extensions).Assembly;
-            return services.AddMediatR(assembly)
+            return services.AddAutoMapper(cfg =>
+                {
+                    cfg.AddMaps(typeof(Extensions), typeof(Entity));
+                    
+                })
+                .AddMediatR(assembly)
                 .AddValidationBehavior()
-                .AddValidatorsFromAssemblies(new[] {assembly})
-                .AddMappers();
+                .AddValidatorsFromAssemblies(new[] { assembly });
         }
-        
-        private static IServiceCollection AddMappers(this IServiceCollection services) =>
-            services.AddScoped<IWeatherForecastMapper, WeatherForecastMapper>();
 
-        private static IServiceCollection AddValidationBehavior(this IServiceCollection services) =>
+        private static IServiceCollection AddValidationBehavior(this IServiceCollection services) => 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
 }
