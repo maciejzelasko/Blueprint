@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 using Blueprint.App.Models;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blueprint.Api.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -19,6 +21,7 @@ namespace Blueprint.Api.Controllers
         }
         
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public Task<IEnumerable<WeatherForecastDto>> Get([FromQuery] int noDays) =>
             _mediator.Send(new GetWeatherForecastsQuery(noDays));
     }
