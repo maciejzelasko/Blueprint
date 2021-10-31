@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
+﻿using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 using Blueprint.App.Models;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blueprint.Api.Controllers;

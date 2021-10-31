@@ -1,5 +1,4 @@
 using System;
-using StronglyTypedIds;
 
 namespace Blueprint.Domain.Entities
 {

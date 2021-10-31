@@ -1,10 +1,5 @@
 using Blueprint.App.DI;
 using Blueprint.Infrastructure.DI;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace Blueprint.Api;
