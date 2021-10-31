@@ -1,5 +1,5 @@
 ﻿using Blueprint.App.Validators;
-using Blueprint.Domain.Entities;
+using Blueprint.Domain.BuildingBlocks.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

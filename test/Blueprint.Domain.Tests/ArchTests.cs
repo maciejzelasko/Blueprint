@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Blueprint.Domain.Entities;
+using Blueprint.Domain.BuildingBlocks.Entities;
 using FluentAssertions;
 using NetArchTest.Rules;
 using Xunit;

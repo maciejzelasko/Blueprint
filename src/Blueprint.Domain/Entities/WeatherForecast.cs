@@ -1,7 +1,7 @@
+using Blueprint.Domain.BuildingBlocks.Entities;
+
 namespace Blueprint.Domain.Entities
 {
-
-
     public class WeatherForecast : Entity<WeatherForecastId>
     {
         private WeatherForecast()

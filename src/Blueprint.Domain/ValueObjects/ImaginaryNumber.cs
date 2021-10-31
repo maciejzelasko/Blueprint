@@ -1,4 +1,6 @@
-﻿namespace Blueprint.Domain.ValueObjects;
+﻿using Blueprint.Domain.BuildingBlocks.ValueObjects;
+
+namespace Blueprint.Domain.ValueObjects;
 
 public class ImaginaryNumber : ValueObject
 {

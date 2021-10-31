@@ -1,4 +1,4 @@
-﻿namespace Blueprint.Domain.Entities;
+﻿namespace Blueprint.Domain.BuildingBlocks.Entities;
 
 public abstract class Entity
 {

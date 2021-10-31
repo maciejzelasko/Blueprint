@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Blueprint.Domain.ValueObjects;
+namespace Blueprint.Domain.BuildingBlocks.ValueObjects;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
