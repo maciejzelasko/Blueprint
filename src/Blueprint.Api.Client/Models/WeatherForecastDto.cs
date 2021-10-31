@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blueprint.Api.Client.Models
+﻿namespace Blueprint.Api.Client.Models
 {
     public class WeatherForecastDto
     {

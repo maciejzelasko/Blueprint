@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Blueprint.Domain.ValueObjects;
+﻿namespace Blueprint.Domain.ValueObjects;
 
 public class ImaginaryNumber : ValueObject
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Blueprint.Api.Client.Models;
+﻿using Blueprint.Api.Client.Models;
 using RestEase;
 
 namespace Blueprint.Api.Client;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Blueprint.Domain.Entities;
+﻿namespace Blueprint.Domain.Entities;
 
 public abstract class Entity
 {

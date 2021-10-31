@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Blueprint.App.Models;
+﻿using Blueprint.App.Models;
 using MediatR;
 
 namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using Blueprint.Domain.Entities;
 using FluentAssertions;
 using NetArchTest.Rules;

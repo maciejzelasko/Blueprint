@@ -1,6 +1,4 @@
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using Blueprint.Api.Client;
 using Blueprint.Api.IntegrationTests.Infrastructure;
 using FluentAssertions;

@@ -1,5 +1,3 @@
-using System;
-
 namespace Blueprint.Domain.Entities
 {
 
