@@ -8,53 +8,52 @@ using MediatR;
 using NetArchTest.Rules;
 using Xunit;
 
-namespace Blueprint.App.Tests
+namespace Blueprint.App.Tests;
+
+public class ArchTests
 {
-    public class ArchTests
+    private static readonly Assembly AppAssembly = typeof(GetWeatherForecastsQuery).Assembly;
+
+    [Fact]
+    public void CommandsAndQueries_ShouldBeImmutable()
     {
-        private static readonly Assembly AppAssembly = typeof(GetWeatherForecastsQuery).Assembly;
+        // Arrange and Act
+        var types = Types.InAssembly(AppAssembly)
+            .That().ImplementInterface(typeof(IRequest<>))
+            .GetTypes();
 
-        [Fact]
-        public void CommandsAndQueries_ShouldBeImmutable()
-        {
-            // Arrange and Act
-            var types = Types.InAssembly(AppAssembly)
-                .That().ImplementInterface(typeof(IRequest<>))
-                .GetTypes();
-
-            // Assert
-            types.ShouldBeImmutable();
-        }
-
-        [Fact]
-        public void CommandAndQueryHandlers_ShouldNotBePublic()
-        {
-            // Arrange and Act
-            var result = Types.InAssembly(AppAssembly)
-                .That()
-                .ImplementInterface(typeof(IRequestHandler<>))
-                .Should().NotBePublic().GetResult();
-
-            result.IsSuccessful.Should().BeTrue();
-        }
+        // Assert
+        types.ShouldBeImmutable();
     }
 
-    public static class ArchTestsExtensions
+    [Fact]
+    public void CommandAndQueryHandlers_ShouldNotBePublic()
     {
-        public static void ShouldBeImmutable(this IEnumerable<Type> types)
-        {
-            var failingTypes = new List<Type>();
-            foreach (var type in types)
-                if (IsImmutable(type) == false)
-                {
-                    failingTypes.Add(type);
-                    break;
-                }
+        // Arrange and Act
+        var result = Types.InAssembly(AppAssembly)
+            .That()
+            .ImplementInterface(typeof(IRequestHandler<>))
+            .Should().NotBePublic().GetResult();
 
-            failingTypes.Should().BeEmpty();
-        }
-
-        private static bool IsImmutable(this Type type) =>
-            type.GetFields().All(x => x.IsInitOnly) && type.GetProperties().All(x => x.CanWrite == false);
+        result.IsSuccessful.Should().BeTrue();
     }
+}
+
+public static class ArchTestsExtensions
+{
+    public static void ShouldBeImmutable(this IEnumerable<Type> types)
+    {
+        var failingTypes = new List<Type>();
+        foreach (var type in types)
+            if (IsImmutable(type) == false)
+            {
+                failingTypes.Add(type);
+                break;
+            }
+
+        failingTypes.Should().BeEmpty();
+    }
+
+    private static bool IsImmutable(this Type type) =>
+        type.GetFields().All(x => x.IsInitOnly) && type.GetProperties().All(x => x.CanWrite == false);
 }

@@ -6,46 +6,45 @@ using FluentAssertions;
 using NetArchTest.Rules;
 using Xunit;
 
-namespace Blueprint.Domain.Tests
+namespace Blueprint.Domain.Tests;
+
+public class ArchTests
 {
-    public class ArchTests
+    private static readonly Assembly DomainAssembly = typeof(Entity).Assembly;
+
+    [Fact]
+    public void Entity_ShouldHaveParameterlessPrivateConstructor()
     {
-        private static readonly Assembly DomainAssembly = typeof(Entity).Assembly;
+        // Arrange
+        var entityTypes = Types.InAssembly(DomainAssembly)
+            .That()
+            .Inherit(typeof(Entity))
+            .And()
+            .AreNotAbstract()
+            .GetTypes();
 
-        [Fact]
-        public void Entity_ShouldHaveParameterlessPrivateConstructor()
-        {
-            // Arrange
-            var entityTypes = Types.InAssembly(DomainAssembly)
-                .That()
-                .Inherit(typeof(Entity))
-                .And()
-                .AreNotAbstract()
-                .GetTypes();
+        // Act
+        var failingTypes =
+            from entityType in entityTypes
+            let hasPrivateParameterlessConstructor = entityType.HasPrivateParameterlessConstructor()
+            where !hasPrivateParameterlessConstructor
+            select entityType;
 
-            // Act
-            var failingTypes =
-                from entityType in entityTypes
-                let hasPrivateParameterlessConstructor = entityType.HasPrivateParameterlessConstructor()
-                where !hasPrivateParameterlessConstructor
-                select entityType;
-
-            // Assert
-            failingTypes.Should().BeNullOrEmpty();
-        }
+        // Assert
+        failingTypes.Should().BeNullOrEmpty();
     }
+}
 
-    public static class ArchTestsExtensions
+public static class ArchTestsExtensions
+{
+    public static bool HasPrivateParameterlessConstructor(this Type type)
     {
-        public static bool HasPrivateParameterlessConstructor(this Type type)
-        {
-            var hasPrivateParameterlessConstructor = false;
-            var constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-            foreach (var constructorInfo in constructors)
-                if (constructorInfo.IsPrivate && constructorInfo.GetParameters().Length == 0)
-                    hasPrivateParameterlessConstructor = true;
+        var hasPrivateParameterlessConstructor = false;
+        var constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+        foreach (var constructorInfo in constructors)
+            if (constructorInfo.IsPrivate && constructorInfo.GetParameters().Length == 0)
+                hasPrivateParameterlessConstructor = true;
 
-            return hasPrivateParameterlessConstructor;
-        }
+        return hasPrivateParameterlessConstructor;
     }
 }

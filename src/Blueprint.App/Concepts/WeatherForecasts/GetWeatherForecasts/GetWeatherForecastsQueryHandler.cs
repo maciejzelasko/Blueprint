@@ -7,26 +7,24 @@ using Blueprint.App.Models;
 using Blueprint.Domain.Repositories;
 using MediatR;
 
-namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts
+namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
+
+internal sealed class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecastDto>>
 {
-    internal sealed class
-        GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecastDto>>
+    private readonly IWeatherForecastRepo _weatherForecastRepo;
+    private readonly IMapper _mapper;
+
+
+    public GetWeatherForecastsQueryHandler(IWeatherForecastRepo weatherForecastRepo, IMapper mapper)
     {
-        private readonly IWeatherForecastRepo _weatherForecastRepo;
-        private readonly IMapper _mapper;
+        _weatherForecastRepo = weatherForecastRepo;
+        _mapper = mapper;
+    }
 
-
-        public GetWeatherForecastsQueryHandler(IWeatherForecastRepo weatherForecastRepo, IMapper mapper)
-        {
-            _weatherForecastRepo = weatherForecastRepo;
-            _mapper = mapper;
-        }
-
-        public async Task<IEnumerable<WeatherForecastDto>> Handle(GetWeatherForecastsQuery request,
-            CancellationToken cancellationToken)
-        {
-            var weatherForecasts = await _weatherForecastRepo.GetAllAsync();
-            return weatherForecasts.Select(_mapper.Map<WeatherForecastDto>).ToList();
-        }
+    public async Task<IEnumerable<WeatherForecastDto>> Handle(GetWeatherForecastsQuery request,
+        CancellationToken cancellationToken)
+    {
+        var weatherForecasts = await _weatherForecastRepo.GetAllAsync();
+        return weatherForecasts.Select(_mapper.Map<WeatherForecastDto>).ToList();
     }
 }

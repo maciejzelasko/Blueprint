@@ -3,10 +3,7 @@ using StronglyTypedIds;
 
 namespace Blueprint.Domain.Entities
 {
-    [StronglyTypedId]
-    public partial struct WeatherForecastId
-    {
-    }
+
 
     public class WeatherForecast : Entity<WeatherForecastId>
     {

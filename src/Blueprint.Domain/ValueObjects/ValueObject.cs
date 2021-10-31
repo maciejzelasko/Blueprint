@@ -3,40 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Blueprint.Domain.ValueObjects
+namespace Blueprint.Domain.ValueObjects;
+
+public abstract class ValueObject : IEquatable<ValueObject>
 {
-    public abstract class ValueObject : IEquatable<ValueObject>
+    public bool Equals(ValueObject other)
     {
-        public bool Equals(ValueObject other)
-        {
-            return Equals(other as object);
-        }
+        return Equals(other as object);
+    }
 
-        public abstract override int GetHashCode();
+    public abstract override int GetHashCode();
 
-        public static bool operator ==(ValueObject obj1, ValueObject obj2)
-        {
-            return obj1?.Equals(obj2) ?? Equals(obj2, null);
-        }
+    public static bool operator ==(ValueObject obj1, ValueObject obj2)
+    {
+        return obj1?.Equals(obj2) ?? Equals(obj2, null);
+    }
 
-        public static bool operator !=(ValueObject obj1, ValueObject obj2)
-        {
-            return !(obj1 == obj2);
-        }
+    public static bool operator !=(ValueObject obj1, ValueObject obj2)
+    {
+        return !(obj1 == obj2);
+    }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
 
-            return GetEqualityProperties().Select(p => GetType().GetProperty(p)).All(p => PropertiesAreEqual(obj, p));
-        }
+        return GetEqualityProperties().Select(p => GetType().GetProperty(p)).All(p => PropertiesAreEqual(obj, p));
+    }
 
-        protected abstract IEnumerable<string> GetEqualityProperties();
-        
-        private bool PropertiesAreEqual(object obj, PropertyInfo p)
-        {
-            return Equals(p.GetValue(this, null), p.GetValue(obj, null));
-        }
+    protected abstract IEnumerable<string> GetEqualityProperties();
+
+    private bool PropertiesAreEqual(object obj, PropertyInfo p)
+    {
+        return Equals(p.GetValue(this, null), p.GetValue(obj, null));
     }
 }

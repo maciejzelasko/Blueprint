@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 
-namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts
+namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
+
+public class GetWeatherForecastsQueryValidator : AbstractValidator<GetWeatherForecastsQuery>
 {
-    public class GetWeatherForecastsQueryValidator : AbstractValidator<GetWeatherForecastsQuery>
+    public GetWeatherForecastsQueryValidator()
     {
-        public GetWeatherForecastsQueryValidator()
-        {
-            RuleFor(x => x.NoDays).GreaterThan(0);
-        }
+        RuleFor(x => x.NoDays).GreaterThan(0);
     }
 }

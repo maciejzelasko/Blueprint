@@ -6,21 +6,20 @@ using Blueprint.Api.IntegrationTests.Infrastructure;
 using FluentAssertions;
 using Xunit;
 
-namespace Blueprint.Api.IntegrationTests
+namespace Blueprint.Api.IntegrationTests;
+
+public class WeatherForecastTests : BaseIntegrationTests<IWeatherForecastApi>
 {
-    public class WeatherForecastTests : BaseIntegrationTests<IWeatherForecastApi>
+    [Fact]
+    public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
     {
-        [Fact]
-        public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
-        {
-            // Arrange
-            const int noDays = 7;
+        // Arrange
+        const int noDays = 7;
 
-            // Act
-            var response = await Api.GetAsync(noDays, CancellationToken.None);
+        // Act
+        var response = await Api.GetAsync(noDays, CancellationToken.None);
 
-            // Assert
-            response.ResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
-        }
+        // Assert
+        response.ResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }

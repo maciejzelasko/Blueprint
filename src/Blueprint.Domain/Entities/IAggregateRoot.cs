@@ -1,6 +1,5 @@
-﻿namespace Blueprint.Domain.Entities
+﻿namespace Blueprint.Domain.Entities;
+
+public interface IAggregateRoot
 {
-    public interface IAggregateRoot
-    {
-    }
 }

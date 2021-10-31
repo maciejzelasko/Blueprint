@@ -2,13 +2,12 @@
 using Blueprint.App.Models;
 using Blueprint.Domain.Entities;
 
-namespace Blueprint.App.Profiles
+namespace Blueprint.App.Profiles;
+
+public class WeatherForecastProfile : Profile
 {
-    public class WeatherForecastProfile : Profile
+    public WeatherForecastProfile()
     {
-        public WeatherForecastProfile()
-        {
-            CreateMap<WeatherForecast, WeatherForecastDto>();;
-        }
+        CreateMap<WeatherForecast, WeatherForecastDto>(); ;
     }
 }
