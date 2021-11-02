@@ -14,10 +14,7 @@ public class ImaginaryNumber : ValueObject
 
     public double ImaginaryUnit { get; }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(RealNumber, ImaginaryUnit);
-    }
+    public override int GetHashCode() => HashCode.Combine(RealNumber, ImaginaryUnit);
 
     protected override IEnumerable<string> GetEqualityProperties()
     {

@@ -10,7 +10,6 @@ internal sealed class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeath
     private readonly IWeatherForecastRepo _weatherForecastRepo;
     private readonly IMapper _mapper;
 
-
     public GetWeatherForecastsQueryHandler(IWeatherForecastRepo weatherForecastRepo, IMapper mapper)
     {
         _weatherForecastRepo = weatherForecastRepo;

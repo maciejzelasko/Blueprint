@@ -4,12 +4,9 @@ namespace Blueprint.Domain.BuildingBlocks.ValueObjects;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
-    public bool Equals(ValueObject other)
-    {
-        return Equals(other as object);
-    }
+    public bool Equals(ValueObject other) => Equals(other as object);
 
-    public abstract override int GetHashCode();
+    public override abstract int GetHashCode();
 
     public static bool operator ==(ValueObject obj1, ValueObject obj2)
     {
@@ -31,8 +28,5 @@ public abstract class ValueObject : IEquatable<ValueObject>
 
     protected abstract IEnumerable<string> GetEqualityProperties();
 
-    private bool PropertiesAreEqual(object obj, PropertyInfo p)
-    {
-        return Equals(p.GetValue(this, null), p.GetValue(obj, null));
-    }
+    private bool PropertiesAreEqual(object obj, PropertyInfo p) => Equals(p.GetValue(this, null), p.GetValue(obj, null));
 }

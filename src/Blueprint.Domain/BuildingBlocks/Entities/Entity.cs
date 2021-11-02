@@ -26,26 +26,24 @@ public abstract class Entity
 
     public static bool operator !=(Entity a, Entity b) => !(a == b);
 
-    public abstract override int GetHashCode();
+    public override abstract int GetHashCode();
 
-    public abstract override bool Equals(object obj);
+    public override abstract bool Equals(object obj);
 }
 
-public abstract class Entity<T> : Entity where T : IComparable<T>, IEquatable<T>
+public abstract class Entity<TId> : Entity where TId : IComparable<TId>, IEquatable<TId>
 {
     protected Entity()
     {
     }
 
-    protected Entity(T id)
-        : base() =>
-        Id = id;
+    protected Entity(TId id) : base() => Id = id;
 
-    public T Id { get; }
+    public TId Id { get; }
 
-    public override int GetHashCode() => (GetRealType().ToString() + Id).GetHashCode();
+    public override int GetHashCode() => ($"{GetRealType()}{Id}").GetHashCode();
 
-    public abstract T EmptyValue { get; }
+    public abstract TId EmptyValue { get; }
 
     private Type GetRealType()
     {
@@ -56,7 +54,7 @@ public abstract class Entity<T> : Entity where T : IComparable<T>, IEquatable<T>
 
     public override bool Equals(object obj)
     {
-        if (!(obj is Entity<T> other))
+        if (obj is not Entity<TId> other)
             return false;
 
         if (ReferenceEquals(this, other))

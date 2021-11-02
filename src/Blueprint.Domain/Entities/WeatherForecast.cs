@@ -8,7 +8,7 @@ namespace Blueprint.Domain.Entities
         {
         }
 
-        public WeatherForecast(DateTime date, int temperatureC, string summary) : base(new WeatherForecastId(Guid.NewGuid()))
+        public WeatherForecast(DateTime date, int temperatureC, string summary) : base(WeatherForecastId.New())
         {
             Date = date;
             TemperatureC = temperatureC;
