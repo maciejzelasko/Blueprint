@@ -6,8 +6,16 @@ using Xunit;
 
 namespace Blueprint.Api.IntegrationTests;
 
-public class WeatherForecastTests : BaseIntegrationTests<IWeatherForecastApi>
+[Collection(BlueprintAppCollection.Name)]
+public class WeatherForecastTests
 {
+    public WeatherForecastTests(BlueprintAppFixture fixture)
+    {
+        Fixture = fixture;
+    }
+
+    private BlueprintAppFixture Fixture { get; }
+
     [Fact]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
     {
@@ -15,7 +23,9 @@ public class WeatherForecastTests : BaseIntegrationTests<IWeatherForecastApi>
         const int noDays = 7;
 
         // Act
-        var response = await Api.GetAsync(noDays, CancellationToken.None);
+        var api = Fixture.CreateApi<IWeatherForecastApi>();
+        
+        var response = await api.GetAsync(noDays, CancellationToken.None);
 
         // Assert
         response.ResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);

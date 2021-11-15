@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<InternalsVisibleTo Include="Blueprint.Api.IntegrationTests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
