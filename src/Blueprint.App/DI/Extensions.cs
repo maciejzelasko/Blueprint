@@ -1,4 +1,5 @@
-﻿using Blueprint.App.Validators;
+﻿using Blueprint.App.Models;
+using Blueprint.App.Validators;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,9 +10,9 @@ public static class Extensions
 {
     public static IServiceCollection AddBlueprintApp(this IServiceCollection services)
     {
-        var assembly = typeof(Extensions).Assembly;
+        var assembly = typeof(WeatherForecastDto).Assembly;
         return services
-            .AddMediatR(assembly)
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<WeatherForecastDto>())
             .AddValidationBehavior()
             .AddValidatorsFromAssemblies(new[] { assembly });
     }
