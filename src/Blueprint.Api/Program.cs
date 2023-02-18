@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
 // Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(o =>
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen(o =>
 {
     o.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
     o.DescribeAllParametersInCamelCase();
 });
 
-builder.Services.AddInfrastructure();
-builder.Services.AddBlueprintApp();
+services.AddInfrastructure();
+services.AddBlueprintApp();
 
 var app = builder.Build();
 
@@ -30,13 +30,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-app.MapGet("WeatherForecast", async (ISender sender, CancellationToken cancellationToken, [FromQuery] int noDays) => 
+app.MapGet("/weatherforecast", async (ISender sender, CancellationToken cancellationToken, [FromQuery] int noDays) =>
 {
     var result = await sender.Send(new GetWeatherForecastsQuery(noDays), cancellationToken);
     return Results.Ok(result);
-});
+})
+    .WithName("GetWeatherForecast")
+.WithOpenApi();
 
 app.Run();
 

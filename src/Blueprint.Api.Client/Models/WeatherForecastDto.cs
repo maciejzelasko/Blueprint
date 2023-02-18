@@ -8,6 +8,6 @@
 
         public int TemperatureF { get; init; }
 
-        public string Summary { get; init; }
+        public string? Summary { get; init; }
     }
 }
