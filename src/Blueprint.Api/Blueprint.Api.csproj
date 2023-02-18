@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<InternalsVisibleTo Include="Blueprint.Api.IntegrationTests" />
+	  <InternalsVisibleTo Include="Blueprint.Api.IntegrationTests" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +22,5 @@
     <ProjectReference Include="..\Blueprint.App\Blueprint.App.csproj" />
     <ProjectReference Include="..\Blueprint.Infrastructure\Blueprint.Infrastructure.csproj" />
   </ItemGroup>
-
 
 </Project>
