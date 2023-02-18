@@ -1,5 +1,8 @@
+using Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 using Blueprint.App.DI;
 using Blueprint.Infrastructure.DI;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +32,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapGet("WeatherForecast", async (ISender sender, CancellationToken cancellationToken, [FromQuery] int noDays) => 
+{
+    var result = await sender.Send(new GetWeatherForecastsQuery(noDays), cancellationToken);
+    return Results.Ok(result);
+});
 
 app.Run();
 
