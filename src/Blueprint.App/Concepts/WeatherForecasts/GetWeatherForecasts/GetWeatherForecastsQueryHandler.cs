@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using Blueprint.App.Models;
+﻿using Blueprint.App.Models;
 using Blueprint.Domain.Repositories;
+using Mapster;
 using MediatR;
 
 namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
@@ -8,18 +8,16 @@ namespace Blueprint.App.Concepts.WeatherForecasts.GetWeatherForecasts;
 internal sealed class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecastDto>>
 {
     private readonly IWeatherForecastRepo _weatherForecastRepo;
-    private readonly IMapper _mapper;
 
-    public GetWeatherForecastsQueryHandler(IWeatherForecastRepo weatherForecastRepo, IMapper mapper)
+    public GetWeatherForecastsQueryHandler(IWeatherForecastRepo weatherForecastRepo)
     {
         _weatherForecastRepo = weatherForecastRepo;
-        _mapper = mapper;
     }
 
     public async Task<IEnumerable<WeatherForecastDto>> Handle(GetWeatherForecastsQuery request,
         CancellationToken cancellationToken)
     {
         var weatherForecasts = await _weatherForecastRepo.GetAllAsync();
-        return weatherForecasts.Select(_mapper.Map<WeatherForecastDto>).ToList();
+        return weatherForecasts.Select(wf => wf.Adapt<WeatherForecastDto>()).ToList();
     }
 }
