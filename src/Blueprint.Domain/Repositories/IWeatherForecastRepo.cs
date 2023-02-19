@@ -4,5 +4,5 @@ namespace Blueprint.Domain.Repositories;
 
 public interface IWeatherForecastRepo
 {
-    Task<IReadOnlyCollection<WeatherForecast>> GetAllAsync();
+    Task<IReadOnlyCollection<WeatherForecast>> GetAllAsync(int take);
 }

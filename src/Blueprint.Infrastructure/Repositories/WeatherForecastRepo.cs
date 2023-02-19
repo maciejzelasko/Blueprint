@@ -13,9 +13,12 @@ internal sealed class WeatherForecastRepo : IWeatherForecastRepo
         _collection = database.GetCollection<WeatherForecast>("WeatherForecast");
     }
 
-    public async Task<IReadOnlyCollection<WeatherForecast>> GetAllAsync()
+    public async Task<IReadOnlyCollection<WeatherForecast>> GetAllAsync(int take)
     {
-        var result = await _collection.AsQueryable().ToListAsync();
-        return result;
+        var result = await _collection.FindAsync(Builders<WeatherForecast>.Filter.Empty, new FindOptions<WeatherForecast>
+        {
+            Limit = take
+        });
+        return await result.ToListAsync();
     }
 }

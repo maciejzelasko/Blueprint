@@ -17,7 +17,7 @@ internal sealed class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeath
     public async Task<IEnumerable<WeatherForecastDto>> Handle(GetWeatherForecastsQuery request,
         CancellationToken cancellationToken)
     {
-        var weatherForecasts = await _weatherForecastRepo.GetAllAsync();
+        var weatherForecasts = await _weatherForecastRepo.GetAllAsync(request.NoDays);
         return weatherForecasts.Select(wf => wf.Adapt<WeatherForecastDto>()).ToList();
     }
 }
