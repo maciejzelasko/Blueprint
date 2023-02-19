@@ -8,4 +8,6 @@ public class MongoOptions
     public string? Database { get; init; }
 
     public bool? SeedData { get; init; }
+
+    public bool ShouldSeedData => SeedData.HasValue && SeedData.Value;
 }

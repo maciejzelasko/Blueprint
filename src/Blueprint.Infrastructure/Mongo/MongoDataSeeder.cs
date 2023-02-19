@@ -34,7 +34,7 @@ internal class MongoDataSeeder : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        if (!_options.Value.SeedData.HasValue || (_options.Value.SeedData ?? false)) 
+        if (!_options.Value.ShouldSeedData) 
             return;
 
         var collections = await _database.ListCollectionNamesAsync(new ListCollectionNamesOptions 
