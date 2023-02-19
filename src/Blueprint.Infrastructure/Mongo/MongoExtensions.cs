@@ -1,3 +1,4 @@
+using Blueprint.Infrastructure.Mongo.Seeds;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -29,8 +30,12 @@ internal static class MongoExtensions
             var client = provider.GetRequiredService<IMongoClient>();
             return client.GetDatabase(mongoSetting.Database);
         });
+        services.Scan(scan => 
+            scan.FromAssemblyOf<MongoDataSeeder>()                    
+                .AddClasses(c => c.AssignableTo<IMongoSeeder>())
+                .AsImplementedInterfaces());
         services.AddHostedService<MongoDataSeeder>();
-
+        
         return services;
     }
 }
