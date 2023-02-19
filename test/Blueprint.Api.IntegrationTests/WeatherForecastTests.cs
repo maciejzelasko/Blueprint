@@ -28,6 +28,6 @@ public class WeatherForecastTests
         var response = await api.GetAsync(noDays, CancellationToken.None);
 
         // Assert
-        response.ResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }

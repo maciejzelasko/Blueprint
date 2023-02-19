@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using RestEase;
+using Refit;
 
 namespace Blueprint.Api.IntegrationTests.Infrastructure;
 
@@ -8,6 +8,6 @@ public class BlueprintAppFixture : WebApplicationFactory<Program>
     public TApi CreateApi<TApi>()
     {
         var client = CreateClient();
-        return RestClient.For<TApi>(client);
+        return RestService.For<TApi>(client);
     }
 }

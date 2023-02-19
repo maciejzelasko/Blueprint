@@ -8,6 +8,7 @@ namespace Blueprint.Infrastructure.Mongo;
 
 internal class MongoDataSeeder : IHostedService
 {
+    private const string CollectionName = "WeatherForecast";
     private static readonly IReadOnlyCollection<(int Temp, string Summary)> WeatherForecasts = new[]
     {
         (-10, "Freezing"),
@@ -38,12 +39,12 @@ internal class MongoDataSeeder : IHostedService
 
         var collections = await _database.ListCollectionNamesAsync(new ListCollectionNamesOptions 
         {
-            Filter = new BsonDocument("name", "WeatherForecast")
+            Filter = new BsonDocument("name", CollectionName)
         }, cancellationToken);
         if (!await collections.AnyAsync(cancellationToken: cancellationToken)) 
         {
-            await _database.CreateCollectionAsync("WeatherForecast", cancellationToken: cancellationToken);
-            var collection = _database.GetCollection<WeatherForecast>("WeatherForecast");
+            await _database.CreateCollectionAsync(CollectionName, cancellationToken: cancellationToken);
+            var collection = _database.GetCollection<WeatherForecast>(CollectionName);
             var forecasts = new List<WeatherForecast>();
             foreach (var (forecast, index) in WeatherForecasts.Select((summary, index) => (summary, index)))
             {
@@ -54,5 +55,5 @@ internal class MongoDataSeeder : IHostedService
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => 
-        _database.DropCollectionAsync("WeatherForecast", cancellationToken);
+        _database.DropCollectionAsync(CollectionName, cancellationToken);
 }
