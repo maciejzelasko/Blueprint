@@ -8,9 +8,18 @@ namespace Blueprint.Infrastructure.Mongo;
 
 internal class MongoDataSeeder : IHostedService
 {
-    private static readonly IReadOnlyCollection<string> Summaries = new[]
-{
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    private static readonly IReadOnlyCollection<(int Temp, string Summary)> WeatherForecasts = new[]
+    {
+        (-10, "Freezing"),
+        (-5, "Bracing"),
+        (0, "Chilly"),
+        (5, "Cool"),
+        (10, "Mild"),
+        (20, "Warm"),
+        (25, "Balmy"),
+        (30, "Hot"),
+        (35, "Sweltering"), 
+        (40, "Scorching")
     };
 
     private readonly IMongoDatabase _database;
@@ -30,23 +39,20 @@ internal class MongoDataSeeder : IHostedService
         var collections = await _database.ListCollectionNamesAsync(new ListCollectionNamesOptions 
         {
             Filter = new BsonDocument("name", "WeatherForecast")
-        });
-        if (!collections.Any()) 
+        }, cancellationToken);
+        if (!await collections.AnyAsync(cancellationToken: cancellationToken)) 
         {
-            await _database.CreateCollectionAsync("WeatherForecast");
+            await _database.CreateCollectionAsync("WeatherForecast", cancellationToken: cancellationToken);
             var collection = _database.GetCollection<WeatherForecast>("WeatherForecast");
-            var random = new Random();
             var forecasts = new List<WeatherForecast>();
-            foreach (var (summary, index) in Summaries.Select((summary, index) => (summary, index)))
+            foreach (var (forecast, index) in WeatherForecasts.Select((summary, index) => (summary, index)))
             {
-                forecasts.Add(new WeatherForecast(DateTime.Now.AddDays(index + 1), random.Next(-30, 30), summary));
+                forecasts.Add(new WeatherForecast(DateTime.Now.AddDays(index + 1), forecast.Temp, forecast.Summary));
             }
             await collection.InsertManyAsync(forecasts, cancellationToken: cancellationToken);
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return _database.DropCollectionAsync("WeatherForecast");
-    }
+    public Task StopAsync(CancellationToken cancellationToken) => 
+        _database.DropCollectionAsync("WeatherForecast", cancellationToken);
 }
