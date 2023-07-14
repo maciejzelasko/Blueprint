@@ -6,7 +6,7 @@ namespace Blueprint.Infrastructure.Mongo;
 
 internal class MongoDataSeeder : IHostedService
 {
-    private MongoOptions _options;
+    private readonly MongoOptions _options;
     private IEnumerable<IMongoSeeder> _mongoSeeders;
 
     public MongoDataSeeder(IOptions<MongoOptions> options, IEnumerable<IMongoSeeder> mongoSeeders)
