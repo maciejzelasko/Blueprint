@@ -35,7 +35,7 @@ app.MapGet("/weatherforecast", async (ISender sender, CancellationToken cancella
     var result = await sender.Send(new GetWeatherForecastsQuery(noDays), cancellationToken);
     return Results.Ok(result);
 })
-    .WithName("GetWeatherForecast")
+.WithName("GetWeatherForecast")
 .WithOpenApi();
 
 app.Run();
