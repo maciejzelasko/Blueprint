@@ -2,7 +2,7 @@
 
 namespace Blueprint.Domain.Entities;
 
-[StronglyTypedId(converters: StronglyTypedIdConverter.SystemTextJson)]
+[StronglyTypedId]
 public partial struct WeatherForecastId
 {
 }
